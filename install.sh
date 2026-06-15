@@ -811,15 +811,7 @@ echo ""
 [[ $INSTALL_JF  -eq 1 ]] && printf "  ${CYAN}%-20s${NC} : http://%s:%s\n" "Jellyfin"    "$SERVER_IP" "$JF_PORT"
 [[ $INSTALL_FB  -eq 1 ]] && printf "  ${CYAN}%-20s${NC} : http://%s:%s\n" "FileBrowser" "$SERVER_IP" "$FB_PORT"
 
-if [[ $DO_TUNING -eq 1 ]]; then
-    echo ""
-    echo -e "  ${MAGENTA}${BOLD}Kernel Tuning${NC}"
-    printf "  %-20s : %s\n" "Congestion" "$(sysctl -n net.ipv4.tcp_congestion_control 2>/dev/null)"
-    printf "  %-20s : %s\n" "rmem_max"   "$(sysctl -n net.core.rmem_max 2>/dev/null)"
-    printf "  %-20s : %s\n" "FD limit"   "$(ulimit -n)"
-    printf "  %-20s : %s\n" "Multiqueue" "RPS/RFS/XPS enabled on all cores"
-    [[ $DO_SWAP -eq 1 ]] && printf "  %-20s : %s\n" "Swap" "$(free -h | awk '/Swap/{print $2}')"
-fi
+[[ $DO_SWAP -eq 1 ]] && printf "  %-20s : %s\n" "Swap" "$(free -h | awk '/Swap/{print $2}')"
 
 if [[ $INSTALL_MEDIA -eq 1 ]]; then
     echo ""
